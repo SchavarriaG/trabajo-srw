@@ -39,6 +39,8 @@ if word == word2:
     print("yes")
 else:
     print("Nel mijo")
+
+
 #for y in x:
  # print(y.get('_id')) 
 

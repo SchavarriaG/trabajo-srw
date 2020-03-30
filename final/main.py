@@ -34,7 +34,7 @@ def index():
 @app.route('/signup/', methods=("GET", "POST"))
 def signup():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('start'))
     form = SignupForm()
     if form.validate_on_submit():
         name = form.name.data
@@ -58,7 +58,7 @@ def signup():
         login_user(user, remember=True)
         next_page = request.args.get('next', None)
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('start')
         return redirect(next_page)
     return render_template("signup.html", form=form)
 
@@ -82,7 +82,7 @@ def load_user(user_id):
 def login():
     #print(current_user.is_authenticated)
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('start'))
     form = LoginForm()
     if form.validate_on_submit():
         user = get_user(form.email.data)
@@ -92,7 +92,7 @@ def login():
             print(current_user.is_authenticated)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('index')
+                next_page = url_for('start')
             return redirect(next_page)
     return render_template('login_form.html', form=form)
 
@@ -101,6 +101,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/start/')
+def start():
+    return render_template('start.html')
+
 
 
 if __name__ == '__main__':
