@@ -5,8 +5,12 @@
     </head>
     
     <body>
-        <h4> Bienvenido al Sistema</h4>
-          
+        <h2> Bienvenido al Sistema de Recomendación</h2>
+        <h4>Si ya tienes cuenta: <a href="{{ url_for('login') }}">Ingresa acá</a> </h4>
+        <h4>-----------------------------------------------------------------------</h4>
+        <h4>Si quieres crear una: <a href="{{ url_for('signup') }}">Regístrate acá</a> </h4>
+        <h4>-----------------------------------------------------------------------</h4>
+        <h4>Si desea salir: <a href="{{ url_for('logout') }}">Hazlo acá</a> </h4>
     </body>
     
 

@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 import pymongo
- 
 from pymongo import MongoClient
- 
+from bson.objectid import ObjectId
+
 # conexión
 con = MongoClient('mongodb+srv://inmanueld:securepass@ps4games-8q85r.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -22,9 +22,23 @@ mydoc = db.user.find(myquery)
 #x = "tigre"
 #if db.user.find_one({"email": "hotboyy@gmail.com"}):
  #   x = "yuca"
-x = db.user.find_one({"email": "hotboy@gmail.com"})
+y = 'hotboy@gmail.com'
+z = ObjectId('5e80cd22c84c50a8332555da')
+print(type(z))
+w = "5e80cd22c84c50a8332555da"
+x = db.user.find_one({"_id": z })
+print(x)
 print(x.get('_id'))
 
+
+
+word = "yuca"
+word2 = "yuac"
+
+if word == word2:
+    print("yes")
+else:
+    print("Nel mijo")
 #for y in x:
  # print(y.get('_id')) 
 

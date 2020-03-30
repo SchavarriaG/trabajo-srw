@@ -1,5 +1,8 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import pymongo
+from pymongo import MongoClient
+
 
 class User(UserMixin):
     def __init__(self, id, name, email, password, is_admin=False):
@@ -18,7 +21,15 @@ class User(UserMixin):
 users = []
 
 def get_user (email):
-    for user in users:
-        if user.email == email:
-            return user
+    #for user in users:
+    #    if user.email == email:
+    #        return user
+    #return None
+    conexion = MongoClient('mongodb+srv://inmanueld:securepass@ps4games-8q85r.mongodb.net/test?retryWrites=true&w=majority')
+    db = conexion.ps4
+    if db.user.find_one({"email":str(email)}):
+        x = db.user.find_one({"email":str(email)})
+        return User(str(x.get('_id')),str(x.get('nombre')),str(x.get('email')),str(x.get('password')))
     return None
+
+

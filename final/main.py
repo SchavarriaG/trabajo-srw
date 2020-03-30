@@ -6,13 +6,14 @@ from form import LoginForm
 from flask_login import LoginManager
 from flask_login import current_user
 from flask_login import login_user
+from flask_login import logout_user
 from models import users
 from models import User
 from models import get_user
 from werkzeug.urls import url_parse
 import pymongo
 from pymongo import MongoClient
-
+from bson.objectid import ObjectId
 
 
 
@@ -48,7 +49,7 @@ def signup():
         print(password)
 
         x = db.user.find_one({"email": str(email)})
-        user = User(str(x.get('_id')),str(name),str(email),str(password))
+        user = User(1,str(name),str(email),str(password))
         #user = User(len(users) + 1, name, email, password)
         #users.append(user)
         #print(users)
@@ -64,20 +65,31 @@ def signup():
 
 @login_manager.user_loader
 def load_user(user_id):
-    for user in users:
-        if user.id == int(user_id):
-            return user
+    #for user in users:
+     #   if user.id == int(user_id):
+      #      return user
+    #return None
+    if db.user.find_one({"_id":ObjectId(str(user_id))}):
+        x = db.user.find_one({"_id":ObjectId(str(user_id))})
+      
+        print("entra aca xd")
+        
+        return User(str(x.get('_id')),str(x.get('nombre')),str(x.get('email')),str(x.get('password')))
+    print("entra aca NONE")
     return None
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    #print(current_user.is_authenticated)
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = get_user(form.email.data)
+        print(user)
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
+            print(current_user.is_authenticated)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('index')
@@ -85,7 +97,7 @@ def login():
     return render_template('login_form.html', form=form)
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     logout_user()
     return redirect(url_for('index'))
