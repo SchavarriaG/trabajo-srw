@@ -10,12 +10,20 @@ from models import users
 from models import User
 from models import get_user
 from werkzeug.urls import url_parse
+import pymongo
+from pymongo import MongoClient
+
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 
 login_manager = LoginManager(app)
 #login_manager.init_app(app)
+
+conexion = MongoClient('mongodb+srv://inmanueld:securepass@ps4games-8q85r.mongodb.net/test?retryWrites=true&w=majority')
+db = conexion.ps4
 
 @app.route('/') 
 def index():
@@ -32,9 +40,19 @@ def signup():
         email = form.email.data
         password = form.password.data
         # Creamos el usuario y lo guardamos
-        user = User(len(users) + 1, name, email, password)
-        users.append(user)
-        print(users)
+        datos = {"nombre":str(name),"email":str(email),"password":str(password)}
+        db.user.insert_one(datos)
+        
+        print(name)
+        print(email)
+        print(password)
+
+        x = db.user.find_one({"email": str(email)})
+        user = User(str(x.get('_id')),str(name),str(email),str(password))
+        #user = User(len(users) + 1, name, email, password)
+        #users.append(user)
+        #print(users)
+
         # Dejamos al usuario logueado
         login_user(user, remember=True)
         next_page = request.args.get('next', None)

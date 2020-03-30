@@ -10,18 +10,25 @@ con = MongoClient('mongodb+srv://inmanueld:securepass@ps4games-8q85r.mongodb.net
 db = con.ps4
  
 # colección
-User = db.game
+User = db.user
 
-db.game.update_one({'title': 'Borderlands 3'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'5'} }})
-db.game.update_one({'title': 'Doom Eternal'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'5'} }}) 
-db.game.update_one({'title': 'Crash Team Racing Nitro-Fueled'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'5'} }})
-db.game.update_one({'title': 'Resident Evil 3 with Pre-Order Bonus DLC'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'3'} }})
-db.game.update_one({'title': "Assassin's Creed 3 Remastered"}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'4'} }})
-db.game.update_one({'title': 'AFL Evolution 2'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'2'} }})
-db.game.update_one({'title': 'Legendary Fishing'}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'1'} }})
-db.game.update_one({'title': "Space Junkies"}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'5'} }})
-db.game.update_one({'title': "Tom Clancy's Ghost Recon: Wildlands Gold Edition"}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'5'} }})
-db.game.update_one({'title': "Final Fantasy VII Remake with Pre-Order Bonus DLC"}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'1'} }})
+db.user
+
+
+myquery = { "email": "hotboy@gmail.com" }
+
+mydoc = db.user.find(myquery)
+
+#x = "tigre"
+#if db.user.find_one({"email": "hotboyy@gmail.com"}):
+ #   x = "yuca"
+x = db.user.find_one({"email": "hotboy@gmail.com"})
+print(x.get('_id'))
+
+#for y in x:
+ # print(y.get('_id')) 
+
+#db.game.update_one({'title': "Final Fantasy VII Remake with Pre-Order Bonus DLC"}, {'$push': {'rate': {'email': 'hotboy@gmail.com', 'calificacion':'1'} }})
 
 
 #resultado = User.find()
