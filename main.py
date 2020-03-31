@@ -52,7 +52,7 @@ def signup():
         print(password)
 
         x = db.user.find_one({"email": str(email)})
-        user = User(1,str(name),str(email),str(password))
+        user = User(str(x.get('_id')),str(name),str(email),str(password))
         #user = User(len(users) + 1, name, email, password)
         #users.append(user)
         #print(users)
