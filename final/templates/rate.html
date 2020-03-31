@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title> rate </title>
+</head>
+
+<body>
+    <h1> Bienvenido al Sistema de Recomendación</h1>
+    
+    <h4>Si desea salir: <a href="{{ url_for('logout') }}">Hazlo acá</a> </h4>
+    <h3> ---------------------------------------------- </h3>
+    <h3> Acá puedes ver los todos los juegos disponibles:</h3>
+
+    <form action="/my-handling-form-page" method="post">
+        <ul>
+            <li>
+                <label for="name">Título</label>
+                <input type="text" id="name" name="user_name">
+                <label for="mail">Calificación</label>
+                <input type="email" id="mail" name="user_mail">
+                <button type="submit">Envíe su calificación</button>
+            </li>
+    
+            
+        </ul>
+    </form>
+
+    {% for item in list %}
+    
+    <li> {{ item['_id'] }}  {{ item['title'] }}  {{ rate }}  </li>
+    
+    {% endfor %}
+
+   
+
+
+
+
+
+
+</body>
+
+
+</html>

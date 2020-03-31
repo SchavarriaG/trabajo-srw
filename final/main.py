@@ -107,18 +107,17 @@ def logout():
 
 @app.route('/start/')
 def start():
-    return render_template('start.html')
+    list_games = 
+    if 
+        rate = 
+    else: 
+        rate = "No hay calificación" 
+    return render_template('start.html',list = list_games, rate = rate)
 
 @app.route('/recomm/')
 def recomm():
-    print("2")
-    #list = []
-    #games = db.game2.find()
-    list1 = recommen('camilo@gmail.com')
-    list = []
-    
-    #print(list)
-    return render_template('recommendation.html',list = list1)
+    list = recommen('camilo@gmail.com')
+    return render_template('recommendation.html',list = list)
 
 if __name__ == '__main__':
     app.run( debug = True, port= 8000 ) 
