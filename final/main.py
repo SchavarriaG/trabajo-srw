@@ -14,7 +14,10 @@ from werkzeug.urls import url_parse
 import pymongo
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-
+from recommendation import recommen
+import numpy as np
+import math
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -106,7 +109,16 @@ def logout():
 def start():
     return render_template('start.html')
 
-
+@app.route('/recomm/')
+def recomm():
+    print("2")
+    #list = []
+    #games = db.game2.find()
+    list1 = recommen('camilo@gmail.com')
+    list = []
+    
+    #print(list)
+    return render_template('recommendation.html',list = list1)
 
 if __name__ == '__main__':
     app.run( debug = True, port= 8000 ) 

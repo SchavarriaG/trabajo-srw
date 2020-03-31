@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title> recommendation </title>
+</head>
+
+<body>
+    <h2> Bienvenido al Sistema de Recomendación</h2>
+    <h4>Si desea salir: <a href="{{ url_for('logout') }}">Hazlo acá</a> </h4>
+
+    
+    {% for item in list %}
+    <div> {{ item['title'] }} </div>
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>
