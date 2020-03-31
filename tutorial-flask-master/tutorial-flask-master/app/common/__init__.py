@@ -1,7 +1,0 @@
-"""
-
-AUTOR: Juanjo
-
-FECHA DE CREACIÓN: 17/01/2020
-
-"""
