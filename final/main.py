@@ -107,16 +107,28 @@ def logout():
 
 @app.route('/start/')
 def start():
-    list_games = 
-    if 
-        rate = 
-    else: 
-        rate = "No hay calificación" 
-    return render_template('start.html',list = list_games, rate = rate)
+    Games = db.game2.find()
+    Games2 = []
+    user_r = db.user.find_one({"_id":ObjectId(str(current_user.get_id()))})
+    email = user_r.get('email')
+    calif = []
+    for game in Games:
+        rates = game['rate']
+        flag = False
+        for rate in rates:
+            if rate['email'] == email:
+                # calif.append(rate['calificacion'])
+                game['rate2'] = rate['calificacion']
+                flag = True
+        if flag == False:
+            game['rate2'] = '-1'
+        Games2.append(game)
+    return render_template('rate.html', list = Games2, email = email)
 
 @app.route('/recomm/')
 def recomm():
-    list = recommen('camilo@gmail.com')
+    user_r = db.user.find_one({"_id":ObjectId(str(current_user.get_id()))})
+    list = recommen(user_r.get('email'))
     return render_template('recommendation.html',list = list)
 
 if __name__ == '__main__':

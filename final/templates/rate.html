@@ -1,44 +1,91 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title> rate </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 
 <body>
-    <h1> Bienvenido al Sistema de Recomendación</h1>
-    
-    <h4>Si desea salir: <a href="{{ url_for('logout') }}">Hazlo acá</a> </h4>
-    <h3> ---------------------------------------------- </h3>
-    <h3> Acá puedes ver los todos los juegos disponibles:</h3>
 
-    <form action="/my-handling-form-page" method="post">
-        <ul>
-            <li>
-                <label for="name">Título</label>
-                <input type="text" id="name" name="user_name">
-                <label for="mail">Calificación</label>
-                <input type="email" id="mail" name="user_mail">
-                <button type="submit">Envíe su calificación</button>
-            </li>
-    
-            
+    <!-- <h4>Bienvenido al curso de Flask</h4> -->
+    <div class="container-fluid">
+        <br>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="{{ url_for('start') }}">Inicio</a></li>
+            <li role="presentation"><a href="{{ url_for('recomm') }}">Top 10</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Salir</a></li>
         </ul>
-    </form>
 
-    {% for item in list %}
-    
-    <li> {{ item['_id'] }}  {{ item['title'] }}  {{ rate }}  </li>
-    
-    {% endfor %}
+        <h1 class="">Correo: {{ email }} </h1>
+        <!-- <p>{{list}} </p> -->
 
-   
+        <form action="/my-handling-form-page" method="post">
+            <ul>
+                <li>
+                    <label for="name">Título</label>
+                    <input type="text" id="name" name="user_name">
+                    <label for="mail">Calificación</label>
+                    <input type="email" id="mail" name="user_mail">
+                    <button type="submit">Envíe su calificación</button>
+                </li>
+
+
+            </ul>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Desarrollador</th>
+                    <th>Clasificación</th>
+                    <th>Calificación</th>
+                    <th>Actualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in list %}
+                <tr>
+                    <td>{{ item['_id'] }}</td>
+                    <td>{{ item['title'] }}</td>
+                    <td>{{ item['genre'] }}</td>
+                    <td>{{ item['developer'] }}</td>
+                    <td>{{ item['classification'] }}</td>
+                    {% if item['rate2'] != '-1' %}
+                    <td>{{ item['rate2'] }}</td>
+                    {% else %}
+                    <td>Sin calificar</td>
+                    {% endif %}
+                    <td>
+                        <a href="">1</a>&nbsp;
+                        <a href="">2</a>&nbsp;
+                        <a href="">3</a>&nbsp;
+                        <a href="">4</a>&nbsp;
+                        <a href="">5</a>&nbsp;
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
 
 
 
+    </div>
 
 
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}">
+    </script>
 </body>
 
 
-</html>
+<html>
