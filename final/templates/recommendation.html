@@ -1,27 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title> recommendation </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 
 <body>
-    <h2> Bienvenido al Sistema de Recomendación</h2>
-    <h4>Si desea salir: <a href="{{ url_for('logout') }}">Hazlo acá</a> </h4>
 
-    
-    {% for item in list %}
-    <div> {{ item['title'] }} </div>
-    {% endfor %}
-
-
-
-
-
+    <!-- <h4>Bienvenido al curso de Flask</h4> -->
+    <div class="container-fluid">
+        <br>
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="{{ url_for('start') }}">Inicio</a></li>
+            <li role="presentation" class="active"><a href="#">Top 10</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Salir</a></li>
+        </ul>
+        <h2> Top 10 recomendaciones</h2>
 
 
+        <ul class="list-group">
+            {% for item in list %}
+            <li class="list-group-item">{{ item['title'] }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
 
 
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}">
+    </script>
 </body>
-
 
 </html>

@@ -1,40 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- <h4>Bienvenido al curso de Flask</h4> -->
+    <div class="container-fluid">
+        <br>
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation"><a href="{{ url_for('logout') }}">Inicio</a></li>
+            <li role="presentation"><a href="{{ url_for('login') }}">Iniciar Sesión</a></li>
+            <li role="presentation" class="active"><a href="{{ url_for('signup') }}">Registrarse</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Salir</a></li>
+        </ul>
+        <br><br>
+        <div>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.name.label }}
+                    {{ form.name(size=64) }}<br>
+                    {% for error in form.name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.email.label }}
+                    {{ form.email }}<br>
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.password.label }}
+                    {{ form.password }}<br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.submit() }}
+                </div>
+                <div>Ya tienes cuenta? <a href="{{ url_for('login') }}">Ingresa</a></div>
+            </form>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}">
+    </script>
+</body>
+
+
+
+
 <html>
 
-    <head>
-         <title> signup </title>
-    </head>
-    
-    <body>
-        <h4> Registro de Usuarios</h4>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.name.label }}
-                {{ form.name(size=64) }}<br>
-                {% for error in form.name.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div>
-                {{ form.email.label }}
-                {{ form.email }}<br>
-                {% for error in form.email.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div>
-                {{ form.password.label }}
-                {{ form.password }}<br>
-                {% for error in form.password.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div>
-                {{ form.submit() }}
-            </div>
-            <div>Ya tienes cuenta? <a href="{{ url_for('login') }}">Ingresa</a></div>
-        </form>  
-    </body>
-    
+<head>
+    <title> signup </title>
+</head>
+
+<body>
+    <h4> Registro de Usuarios</h4>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}
+            {{ form.name(size=64) }}<br>
+            {% for error in form.name.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.email.label }}
+            {{ form.email }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password.label }}
+            {{ form.password }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+        <div>Ya tienes cuenta? <a href="{{ url_for('login') }}">Ingresa</a></div>
+    </form>
+</body>
+
 
 </html>
