@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from flask import Flask
 from flask import render_template
 from flask import request,redirect, url_for
@@ -105,12 +106,31 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+def updateCal(title, email, cal):
+    game = db.game2.find_one({ 'title': title })
+
+
+
+
+@app.route('/start/<title>/<cal>/<info>')
 @app.route('/start/')
-def start():
-    Games = db.game2.find()
-    Games2 = []
+def start(title=None, cal=None, info=None):
     user_r = db.user.find_one({"_id":ObjectId(str(current_user.get_id()))})
     email = user_r.get('email')
+    name = user_r.get('nombre')
+    if title != None:
+        # updateCal(title, email, cal)
+        print('Actualizando: ', title, cal, info)
+        if info == '-1' or info == -1:
+            up = db.game2.update_one({
+                'title': title
+                }, {'$push': {'rate': {'email': email, 'calificacion':cal} }})
+            print(up)
+        else:
+            up = db.game2.update_one({ 'title': title, 'rate.email': email}, {'$set': { 'rate.$.calificacion' : cal }})
+            print(up)
+    Games = db.game2.find()
+    Games2 = []
     calif = []
     for game in Games:
         rates = game['rate']
@@ -123,7 +143,7 @@ def start():
         if flag == False:
             game['rate2'] = '-1'
         Games2.append(game)
-    return render_template('rate.html', list = Games2, email = email)
+    return render_template('rate.html', list = Games2, email = email, name=name)
 
 @app.route('/recomm/')
 def recomm():

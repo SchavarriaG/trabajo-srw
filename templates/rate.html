@@ -3,9 +3,11 @@
 
 <head>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -23,22 +25,8 @@
             <li role="presentation"><a href="{{ url_for('logout') }}">Salir</a></li>
         </ul>
 
-        <h1 class="">Correo: {{ email }} </h1>
+        <h1 class="">Página de : {{ name }} </h1>
         <!-- <p>{{list}} </p> -->
-
-        <form action="/my-handling-form-page" method="post">
-            <ul>
-                <li>
-                    <label for="name">Título</label>
-                    <input type="text" id="name" name="user_name">
-                    <label for="mail">Calificación</label>
-                    <input type="email" id="mail" name="user_mail">
-                    <button type="submit">Envíe su calificación</button>
-                </li>
-
-
-            </ul>
-        </form>
 
         <table class="table table-bordered">
             <thead>
@@ -66,11 +54,16 @@
                     <td>Sin calificar</td>
                     {% endif %}
                     <td>
-                        <a href="">1</a>&nbsp;
-                        <a href="">2</a>&nbsp;
-                        <a href="">3</a>&nbsp;
-                        <a href="">4</a>&nbsp;
-                        <a href="">5</a>&nbsp;
+                        <a href="{{ url_for('start', title=item['title'], cal=1, info=item['rate2']) }}">1</a>
+                        <a href="{{ url_for('start', title=item['title'], cal=2, info=item['rate2']) }}">2</a>
+                        <a href="{{ url_for('start', title=item['title'], cal=3, info=item['rate2']) }}">3</a>
+                        <a href="{{ url_for('start', title=item['title'], cal=4, info=item['rate2']) }}">4</a>
+                        <a href="{{ url_for('start', title=item['title'], cal=5, info=item['rate2']) }}">5</a>
+                        <!-- <button type="button" class="btn btn-link" onclick="updatecal(1)">1</button>
+                        <button type="button" class="btn btn-link" onclick="updatecal(2)">2</button>
+                        <button type="button" class="btn btn-link" onclick="updatecal(3)">3</button>
+                        <button type="button" class="btn btn-link" onclick="updatecal(4)">4</button>
+                        <button type="button" class="btn btn-link" onclick="updatecal(5)">5</button> -->
                     </td>
                 </tr>
                 {% endfor %}
